@@ -33,7 +33,7 @@ namespace Dio.Series
                         VisualizarSerie();
                         break;
                     case "C":
-                        Console.Clear;
+                        Console.Clear();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -66,9 +66,9 @@ namespace Dio.Series
         private static void InserirSeries()
         {
             Console.WriteLine("Inserir uma Nova Séries");
-            foreach (int i in Enum.GetValues(typeof(Genero)))
+            foreach (int i in Enum.Genero.GetValues(typeof(Genero)))
             {
-                Console.WriteLine("{0} - {1} ", i, Enum.GetName(typeof(Genero), i));
+                Console.WriteLine("{0} - {1} ", i, Enum.Genero.GetName(typeof(Genero), i));
             }
             Console.WriteLine("Digite o genêro entre as opções acima: ");
             int entradaGenero = int.Parse(Console.ReadLine());
@@ -92,12 +92,41 @@ namespace Dio.Series
 
         private static void AtualizarSerie()
         {
-            //no implementado
+            Console.WriteLine("Digite o Id da Série: ");
+            int indiceSerie = int.Parse(Console.ReadLine());
+
+            foreach (int i in Enum.Genero.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine("{0} - {1}",i ,Enum.Genero.GetName(typeof(Genero),i));
+            }
+            Console.WriteLine("Digite o genêro entre as opções acima: ");
+            int entradaGenero = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite o Titulo da Serie: ");
+            String entradaTitulo = Console.ReadLine();
+
+            Console.WriteLine("Digite o Ano de Início da Serie: ");
+            int entradaAno = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite Descrição da Serie: ");
+            String entradaDescricao = Console.ReadLine();
+
+            Serie AtualizaSerie = new Serie(id: indiceSerie,
+                                         genero: (Genero)entradaGenero,
+                                         titulo: entradaTitulo,
+                                         ano: entradaAno,
+                                         descricao: entradaDescricao);
+
+            repositorio.Atualizar(indiceSerie,AtualizaSerie);
         }
 
         private static void ExcluirSerie()
         {
-            //no implementado
+            Console.WriteLine("Digite o Id da Serie");
+            int indeceSerie = int.Parse(Console.ReadLine());
+
+            repositorio.Exclui(indeceSerie);
+            Console.WriteLine("Serie Excluida com Sucesso!!!!");
         }
 
         private static void VisualizarSerie()
