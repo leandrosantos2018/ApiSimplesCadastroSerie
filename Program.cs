@@ -144,6 +144,8 @@ namespace Dio.Series
             if (excluido != true)
             {
                 Console.WriteLine(serie);
+            }else{
+            Console.WriteLine("Você Selecionou uma serie ja Excluida!");
             }
             
         }
